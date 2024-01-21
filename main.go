@@ -1,30 +1,15 @@
 /*
 Copyright © 2024 Chris Powell
-
 */
 package main
+
 import (
 	"bufio"
 	"fmt"
+	"github.com/JeffJerseyCow/dmarcq/dmarc"
 	"net"
 	"os"
-	"github.com/emersion/go-msgauth/dmarc"
 )
-
-func analyzeDMARC(domain string, dmarcDomain string, txtRecords []string) (*dmarc.Record, error) {
-	for _, record := range txtRecords {
-
-		policy, err := dmarc.Parse(record)
-		if err != nil {
-			// Silently Ignore
-			continue
-		}
-
-		return policy, nil
-	}
-
-	return nil, fmt.Errorf("Invalid DMARC Record Found")
-}
 
 func main() {
 
@@ -43,14 +28,20 @@ func main() {
 		return
 	}
 
-	policy, err := analyzeDMARC(domain, dmarcDomain, txtRecords)
-	// fmt.Println("Domain,DMARC Domain,Status,Policy,Subdomain Policy,Percent")
-	if err != nil {
-		fmt.Printf("%s,%s,%s,%s,%s,%s\n", domain, dmarcDomain, "Invalid", "", "", "")
-	} else if policy.Percent == nil {
-		fmt.Printf("%s,%s,%s,%s,%s,%d\n", domain, dmarcDomain, "Valid", policy.Policy, policy.SubdomainPolicy, 100)
+	record, err := dmarc.Analyze(domain, dmarcDomain, txtRecords)
+
+	var vulnerable string
+	if record.Status == "invalid" || record.Policy == "none" || record.SubdomainPolicy == "none" ||
+		record.Percentage != 100 {
+		vulnerable = "vulnerable"
 	} else {
-		fmt.Printf("%s,%s,%s,%s,%s,%d\n", domain, dmarcDomain, "Valid", policy.Policy, policy.SubdomainPolicy,
-			*policy.Percent)
+		vulnerable = "not vulnerable"
+	}
+
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+	} else {
+		fmt.Printf("%s,%s,%s,%s,%s,%d,%s,%s\n", record.Domain, record.DMARCDomain, record.Status, record.Policy,
+			record.SubdomainPolicy, record.Percentage, record.ReportURIAggregate, vulnerable)
 	}
 }

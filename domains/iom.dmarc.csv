@@ -1,10 +1,9 @@
-Domain,DMARC Domain,Status,Policy,Subdomain Policy,Percentage
-arbrus.gov.im,_dmarc.arbrus.gov.im,Valid,none,,100
-castletown.gov.im,_dmarc.castletown.gov.im,Valid,none,,100
-douglas.gov.im,_dmarc.douglas.gov.im,Valid,reject,,100
-gov.im,_dmarc.gov.im,Valid,reject,reject,100
-legislation.gov.im,_dmarc.legislation.gov.im,Valid,none,none,100
-rtc.gov.im,_dmarc.rtc.gov.im,Valid,none,,100
-porterin.gov.im,_dmarc.porterin.gov.im,Valid,none,,100
-portstmary.gov.im,_dmarc.portstmary.gov.im,Valid,none,,100
-services.gov.im,_dmarc.services.gov.im,Valid,none,none,100
+Domain,DMARC Record,Status,Policy,Subdomain Policy,Percentage,Aggregate Report URIs,Vulnerability Status
+arbrus.gov.im,_dmarc.arbrus.gov.im,valid,none,none,100,[mailto:dmarc@arbrus.gov.im],vulnerable
+castletown.gov.im,_dmarc.castletown.gov.im,valid,none,none,100,[mailto:dmarc@castletown.gov.im],vulnerable
+douglas.gov.im,_dmarc.douglas.gov.im,valid,reject,reject,100,[mailto:dmarc@douglas.gov.im],not vulnerable
+gov.im,_dmarc.gov.im,valid,reject,reject,100,[mailto:dmarc@gov.im mailto:dmarc_agg@vali.email],not vulnerable
+legislation.gov.im,_dmarc.legislation.gov.im,valid,none,none,100,[mailto:dmarc@gov.im],vulnerable
+porterin.gov.im,_dmarc.porterin.gov.im,valid,none,none,100,[mailto:dmarc@porterin.gov.im],vulnerable
+portstmary.gov.im,_dmarc.portstmary.gov.im,valid,none,none,100,[mailto:h.fargher@portstmary.gov.im],vulnerable
+services.gov.im,_dmarc.services.gov.im,valid,none,none,100,[mailto:dmarc@gov.im],vulnerable
