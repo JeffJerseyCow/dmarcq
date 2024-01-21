@@ -5,3 +5,6 @@ douglas.gov.im,_dmarc.douglas.gov.im,Valid,reject,,100
 gov.im,_dmarc.gov.im,Valid,reject,reject,100
 legislation.gov.im,_dmarc.legislation.gov.im,Valid,none,none,100
 rtc.gov.im,_dmarc.rtc.gov.im,Valid,none,,100
+porterin.gov.im,_dmarc.porterin.gov.im,Valid,none,,100
+portstmary.gov.im,_dmarc.portstmary.gov.im,Valid,none,,100
+services.gov.im,_dmarc.services.gov.im,Valid,none,none,100
